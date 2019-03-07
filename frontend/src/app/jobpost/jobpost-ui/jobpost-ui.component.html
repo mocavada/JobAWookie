@@ -1,0 +1,31 @@
+<main>
+  <div class="container-fluid">
+   
+    <div class="jobpost-section1 row">
+      <div class="col col-sm-12 col-md-6 col-lg-4">
+        <h5>POST A JOB WOOKIE!</h5>
+        <p>And get the results right away from the Canadian Job Market</p>
+        
+        <app-add
+        (addEvt)="addJobPost($event)"></app-add>
+      </div> <!-- column 1 -->
+
+      <div class="col">
+          <app-search
+              (queryEvt)="searchJob($event)"
+              (orderEvt)="orderPost($event)"
+              [orderBy]="orderBy"
+              [orderType]="orderType"></app-search>
+  
+          <app-list 
+          [totalPost]="lastIndex"
+          [jobList]="modifiedList"
+          (deleteEvt)="deleteJobPost($event)"
+          (updateEvt)="updatePost($event)"></app-list>
+      </div> 
+    </div>  
+  </div>
+</main>    
+
+
+

@@ -1,0 +1,54 @@
+<div class="appointment-list item-list mb-3">
+    <h4 class="text-center">You Have {{totalPost}} Job Post</h4>
+   
+    <div class="pet-item col media py-3"
+      *ngFor="let item of jobList; let i = index">
+      <div class="mr-3">
+        <p>Job Id: {{item.jobId}} | Post Id: {{item.id}}</p>
+        <button class="pet-delete btn btn-sm btn-danger"
+        (click)="handleDelete(item)">
+          <fa-icon icon="times"></fa-icon>
+        </button>
+      </div><!-- media-left -->
+  
+      <div class="pet-info media-body">
+          <div class="pet-head d-flex">
+            <span class="pet-name" contenteditable="true"
+              #companyName (blur)="handleUpdate(item, 'companyName', companyName.innerText)">
+              {{item.companyName}}</span>
+            <span class="apt-date ml-auto">{{item.dateCreated | date: 'M-d h:mm a'}}</span>
+          </div><!-- pet-head -->
+    
+          <div class="owner-name">
+              <span class="label-item">Company Details:</span>
+            <span contenteditable="true"
+              #companyEmail (blur)="handleUpdate(item, 'companyEmail', companyEmail.innerText)">
+              {{item.companyEmail}} |</span>
+            <span contenteditable="true"
+              #companyPhone (blur)="handleUpdate(item, 'companyPhone', companyPhone.innerText)">
+              {{item.companyPhone}}</span>
+          </div>
+          <hr>
+          <div class="owner-name">
+            <span class="label-item">Post Details:</span>
+            <span contenteditable="true"
+              #postTitle (blur)="handleUpdate(item, 'postTitle', postTitle.innerText)">
+              {{item.postTitle}}</span>&#44;
+            <span contenteditable="true"
+              #jobTypeList (blur)="handleUpdate(item, 'jobTypeList', jobTypeList.innerText)">
+              {{item.jobTypeList}}</span>&#44;
+            <span contenteditable="true"
+              #jobTitle (blur)="handleUpdate(item, 'jobTitle', jobTitle.innerText)">
+              {{item.jobTitle}}</span>&#44;
+            <span contenteditable="true"
+              #jobDescription (blur)="handleUpdate(item, 'jobDescription', jobDescription.innerText)">
+              {{item.jobDescription}}</span>&#44;
+            <span contenteditable="true"
+              #jobRequirement (blur)="handleUpdate(item, 'jobRequirement', jobRequirement.innerText)">
+              {{item.jobRequirement}}</span>&#44;
+          </div>
+          
+        </div><!-- pet-info -->
+      </div><!-- pet-item -->
+    </div><!-- appointment-list -->
+  

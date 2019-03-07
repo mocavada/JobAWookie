@@ -1,0 +1,64 @@
+<div class="card textcenter mt-3" [ngClass]="{'add-appointment': showForm, 'animate': status}">
+
+    <div class="apt-addheading card-header bg-primary text-white"
+    (click)="toggleAptDisplay()">
+        <fa-icon icon="plus"></fa-icon> Add Job Post
+    </div><!-- card-header -->
+
+<div class="card-body">
+
+<form class="form-group" id="aptForm" novalidate
+      (ngSubmit)="handleAdd(aptForm.value)"
+      #aptForm="ngForm">
+
+      <div class="form-group form-row">
+     <input type="text" class="form-control" placeholder="Company Name"
+            name="companyName" id="companyName"
+            ngModel>
+   </div>
+   <div class="form-group form-row">
+     <input type="email" class="form-control" placeholder="Company Email"
+            name="companyEmail" id="companyEmail"
+            ngModel>
+   </div>
+   <div class="form-group form-row">
+       <input type="tel" class="form-control" placeholder="Company Phone"
+            name="companyPhone" id="companyPhone"
+            ngModel>
+   </div>
+   <div class="form-group form-row">
+       <input type="text" class="form-control" placeholder="Post Title"
+            name="postTitle" id="postTitle"
+            ngModel>
+   </div>
+   <!-- insert checkbox form group here -->
+   <div class="form-group form-row">
+     <input type="text" class="form-control" placeholder="Job Type"
+            name="jobTypeList" id="jobTypeList"
+            ngModel>
+   </div>
+   <div class="form-group form-row">
+       <input type="text" class="form-control" placeholder="Job Title"
+            name="jobTitle" id="jobTitle"
+            ngModel>
+   </div>
+   
+   <div class="form-group form-row">
+       <label for="jobDescription">Job Description</label>
+       <textarea class="form-control" for="jobDescription" rows="2"
+              name="jobDescription" id="jobDescription"
+              ngModel></textarea>
+     </div>
+
+     <div class="form-group form-row">
+         <label for="jobRequirement">Job Requirements</label>
+         <textarea class="form-control" for="jobRequirement" rows="2" 
+              name="jobRequirement" id="jobRequirement"
+              ngModel></textarea>
+    </div>
+   
+     <input id="postButton" type="submit" value="Post" class="btn btn-primary bg-info">
+   
+ </form> 
+</div><!-- card-body -->
+</div><!-- card-primary -->
