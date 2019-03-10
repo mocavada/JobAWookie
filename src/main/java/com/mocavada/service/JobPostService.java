@@ -32,5 +32,15 @@ public class JobPostService implements IJobPostService  {
         return jobPostRepository.getJobPostById(jobPostId);
     }
 
+    @Override
+    public void deleteJobPost(int jobId) {
+        jobPostRepository.deleteJobPost(jobId);
+    }
+
+    @Override
+    public void updateJobPost(JobPost jobPost) {
+        jobPostRepository.updateJobPost(jobPost);
+    }
+
 
 }

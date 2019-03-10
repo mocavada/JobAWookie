@@ -15,7 +15,7 @@ export class AddComponent implements OnInit {
     console.log(this.showForm);
     this.showForm = !this.showForm;
   }
-
+// Template drive form
   handleAdd(formInfo: any) {
     const tempItem: object = {
         companyName: formInfo.companyName,
@@ -35,6 +35,7 @@ export class AddComponent implements OnInit {
   constructor() {
     this.showForm = true;
   }
+
 
   ngOnInit() {
   }

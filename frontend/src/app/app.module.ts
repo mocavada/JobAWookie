@@ -17,8 +17,8 @@ import { routes } from './app-routing.module';
 @NgModule({
    declarations: [
       AppComponent,
-      HeaderComponent,
       JobpostUiComponent,
+      HeaderComponent,
       ListComponent,
       AddComponent,
       SearchComponent

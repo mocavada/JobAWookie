@@ -65,12 +65,12 @@ dependencies {
 
 //======== tasks for angular frontend
 //node {
-//	version = "11.9.0"
-//	npmVersion = "6.7.0"
+//	version = "10.15.1"
+//	npmVersion = "6.8.0"
 //	download = true
 //	nodeModulesDir = file("frontend")
 //}
-
+//
 //task buildFrontEnd(type: NpmTask, dependsOn: 'npmInstall') {
 //	group = 'application'
 //	description = "Build and watches the client side assets for rebuilding"
@@ -88,10 +88,38 @@ dependencies {
 //	}
 //}
 
+//======== tasks for angular frontend
+//node {
+//	version = "10.15.1"
+//	npmVersion = "6.8.0"
+//	download = true
+//	nodeModulesDir = file("frontend")
+//}
+//
+//task buildFrontEnd(type: NpmTask, dependsOn: 'npmInstall') {
+//	group = 'application'
+//	description = "Build and watches the client side assets for rebuilding"
+//	args = ['run', 'buildDevFast']
+//
+//	//skip update. remove it if needed
+//	nodeSetup.onlyIf {
+//		!nodeSetup.nodeDir.exists()
+//	}
+//	npmSetup.onlyIf {
+//		!npmSetup.npmDir.exists()
+//	}
+//	npmInstall.onlyIf {
+//		!npmSetup.npmDir.exists()
+//	}
+//}
+
+
 //======== comment out this line, to run Spring boot without rebuild angular frontend
+
 //bootRun.dependsOn(buildFrontEnd)
 
 //======== speed boot for spring boot
+
 //bootRun {
 //	systemProperties['Xverify'] = 'none'
 //	systemProperties['TieredStopAtLevel'] = '1'

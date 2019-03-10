@@ -8,5 +8,5 @@ export class Jobpost {
     jobTitle: string;
     jobDescription: string;
     jobRequirement: string;
-    dateCreated: Date;
+    // dateCreated: Date;
 }

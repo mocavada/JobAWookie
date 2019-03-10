@@ -35,6 +35,34 @@ public class JobPostRepository implements IJobPostRepository {
         return entityManager.find(JobPost.class, jobPostId);
     }
 
+    @Override
+    public void deleteJobPost(int postId) {
+        entityManager.remove(getJobPostById(postId));
+    }
+
+    @Override
+    public void updateJobPost(JobPost jobPost) {
+        JobPost jobPost1 = getJobPostById(jobPost.getId());
+
+        jobPost1.setCompanyName(jobPost.getCompanyName());
+        jobPost1.setCompanyEmail(jobPost.getCompanyEmail());
+        jobPost1.setCompanyPhone(jobPost.getCompanyPhone());
+        jobPost1.setPostTitle(jobPost.getPostTitle());
+        jobPost1.setJobTypeList(jobPost.getJobTypeList());
+        jobPost1.setJobTitle(jobPost.getJobTitle());
+        jobPost1.setJobDescription(jobPost.getJobDescription());
+        jobPost1.setJobRequirement(jobPost.getJobRequirement());
+
+        entityManager.flush();
+
+    }
+
+
+
+
+
+
+
 
 
 }

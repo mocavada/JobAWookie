@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TemplateBinding } from '@angular/compiler';
 
 @Component({
   selector: 'app-list',
@@ -13,19 +14,20 @@ export class ListComponent {
   @Input() totalPost;
   @Output() deleteEvt = new EventEmitter();
   @Output() updateEvt = new EventEmitter();
+  @Output() testEvt = new EventEmitter();
 
 
   handleDelete(thePost: object) {
-    console.log(thePost);
+    this.whichPost = thePost;
     this.deleteEvt.emit(thePost);
   }
 
   handleUpdate(thePost: object, labelName: string, newValue: string) {
     this.whichPost = thePost;
     this.updateEvt.emit({
-      thePost: 'thePost',
-      labelName: 'labelName',
-      newValue: 'newValue'
+      thePost: thePost,
+      labelName: labelName,
+      newValue: newValue
     });
   }
 

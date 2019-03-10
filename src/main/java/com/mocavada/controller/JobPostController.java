@@ -43,6 +43,17 @@ public class JobPostController {
         return new ResponseEntity<JobPost>(jobPost, HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteJobPost(@PathVariable("id") int id ) {
+        jobPostService.deleteJobPost(id);
+        return  new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<JobPost> updateJobPost(@RequestBody JobPost jobPost) {
+        jobPostService.updateJobPost(jobPost);
+        return new ResponseEntity<JobPost>(jobPost, HttpStatus.OK);
+    }
 
 
 }

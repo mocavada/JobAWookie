@@ -4,12 +4,13 @@ import { Jobpost } from './../jobpost-pojo/jobpost';
 import { BehaviorSubject, Observable, Subject } from 'rxjs/index';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { without, findIndex } from 'lodash';
 import { trigger, state, style, transition, animate, keyframes} from '@angular/animations';
+
 
 library.add(faTimes, faPlus);
 
@@ -22,6 +23,7 @@ export class JobpostUiComponent implements OnInit {
   private urlRoot = environment.serverAddress;
   getJobPostURL = '/jobpost/all';
   postJobPostURL = '/jobpost/add';
+  deleteJobPostURL = '/jobpost/delete/';
   companyName = 'companyName';
   companyEmail = 'companyEmail';
   postTitle = 'postTitle';
@@ -36,11 +38,24 @@ export class JobpostUiComponent implements OnInit {
   orderBy: string;
   orderType: string;
   lastIndex: number;
+  postId: any;
+
 
   entryCreateForm: FormGroup;
 
   private results$ = new BehaviorSubject<[Jobpost]>(null);
-  postEntry$ = this.results$.asObservable();
+  observeEntry$ = this.results$.asObservable();
+
+  // SERVICE
+  deleteData(id: number) {
+      this.http.delete<[Jobpost]>(this.urlRoot + this.deleteJobPostURL + id)
+      .subscribe(data => {
+        this.results$.next(data);
+        console.log('Delete Data Successfuly!');
+      }, err => {
+          console.log('Something wrong in Deleting Data');
+      });
+  }
 
   postData(entry: Jobpost) {
     this.http
@@ -53,8 +68,10 @@ export class JobpostUiComponent implements OnInit {
     });
   }
 
+  // UI HANDLER
   addJobPost(thePost: any) {
     thePost.jobId = this.lastIndex;
+    console.log( this.postId );
     this.theList.unshift(thePost);
     this.modifiedList.unshift(thePost);
     console.log(thePost);
@@ -62,10 +79,14 @@ export class JobpostUiComponent implements OnInit {
     this.lastIndex++;
   }
 
-  deleteJobPost(thePost: any) {
-    thePost.jobId = this.lastIndex;
-    this.theList = without(this.theList, thePost);
-    this.modifiedList = without(this.theList, thePost);
+  deleteJobPost(delEntry) {
+    console.log(delEntry.id);
+    this.deleteData(delEntry.id);
+
+    delEntry.jobId = this.lastIndex;
+    this.theList = without(this.theList, delEntry);
+    this.modifiedList = without(this.theList, delEntry);
+    console.log(delEntry);
     this.lastIndex--;
   }
 
@@ -147,7 +168,8 @@ export class JobpostUiComponent implements OnInit {
 
   ngOnInit(): void {
     this.lastIndex = 0;
-    this.postEntry$.subscribe(data => {
+
+    this.observeEntry$.subscribe(data => {
       if (data != null) {
         this.modifiedList = data;
         this.sortItems();
@@ -163,6 +185,7 @@ export class JobpostUiComponent implements OnInit {
       this.results$.next(data);
       this.theList = data.map((item: any) => {
         item.jobId = this.lastIndex++;
+        this.postId = item.id;
         return item;
       });
     }, err => {
@@ -173,4 +196,3 @@ export class JobpostUiComponent implements OnInit {
   }
 
 }
-
